@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	
+	<id>default</id>
+	
+	<formats>
+		<format>tar.gz</format>
+		<format>zip</format>
+	</formats>
+	
+	<dependencySets>
+		<dependencySet>
+			<useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+		</dependencySet>
+	</dependencySets>
+	
+	<fileSets>
+		<fileSet>
+			<!-- README and other base directory files. -->
+			<directory>${basedir}</directory>
+			<outputDirectory></outputDirectory>
+			<filtered>true</filtered>
+			<includes>
+				<include>README</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<!-- Scripts to be placed in bin/ -->
+			<directory>${project.build.scriptSourceDirectory}</directory>
+			<outputDirectory>bin</outputDirectory>
+			<filtered>true</filtered>
+			<fileMode>0744</fileMode>
+			<includes>
+				<include>*.sh</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<!-- Configuration files to be placed in conf/ -->
+			<directory>src/main/resources</directory>
+			<outputDirectory>conf</outputDirectory>
+			<includes>
+				<include>*</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
